@@ -1,15 +1,12 @@
 
 import { useState } from 'react'
 import Home from './pages/Home'
-import { Route } from 'react-router-dom';
-
-import { useState } from "react";
-
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   return (
@@ -22,6 +19,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="product/:id" element={<ProductDetails/>} />
       </Routes>
     </>
   );
