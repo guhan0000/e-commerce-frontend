@@ -1,16 +1,16 @@
 import Home from "./pages/Home";
-
-import { useState } from "react";
-
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Register from "./pages/Register";
-import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
+import { Routes, Route } from "react-router-dom";
+
 import { AuthProvider } from "./context/AuthContext";
 import Favourites from "./pages/Favourites";
 import Cart from "./pages/Cart";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+
 
 function App() {
   return (
