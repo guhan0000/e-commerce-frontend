@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-  let { loggedIn, login, logout } = useContext(AuthContext);
+  const { loggedIn, savedUser, login, logout, register } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
   function handleLogout() {
@@ -55,10 +56,26 @@ const Navbar = () => {
                       Cart
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link className="btn nav-link" onClick={handleLogout}>
+                  <li className="nav-item dropdown">
+                    {/* <Link className="btn nav-link" onClick={handleLogout}>
                       Logout
+                    </Link> */}
+                    <Link
+                      to="#"
+                      className="nav-link dropdown-toggle"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {savedUser?.userName + " !"}
                     </Link>
+                    <ul className="dropdown-menu">
+                      <li>
+                        <Link className="dropdown-item" onClick={handleLogout}>
+                          Logout
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
                 </>
               )}
