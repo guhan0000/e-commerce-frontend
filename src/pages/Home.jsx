@@ -15,19 +15,23 @@ function Home() {
     const lastProductIndex = currentPage * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
     const currentProducts = products.slice(firstProductIndex, lastProductIndex);
-    const totalPages = Math.ceil(products.length / productsPerPage)
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const pagesPerGroup = 5;
+    const startPage =
+        Math.floor((currentPage - 1) / pagesPerGroup) * pagesPerGroup + 1;
+    const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
 
     return (
-
         <div className='container mt-5'>
             <h2 className='mb-4 text-center'>Featured Products</h2>
+
             <div className="row">
                 {currentProducts.map((item) => (
                     <div
                         className="col-lg-3 col-md-4 col-sm-6 mb-4"
                         key={item.id}
                     >
-
                         <div className="card h-100 shadow border-0">
                             <img
                                 src={item.thumbnail}
@@ -56,39 +60,51 @@ function Home() {
                                 </button>
                             </div>
                         </div>
-                        <div className='d-flex justify-content-center mt-4'>
-                            <nav>
-                                <ul className='pagination'>
-                                    <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-                                        <button className='page-link' onClick={() => setCurrentPage(currentPage - 1)}>
-                                            Previous
-                                        </button>
-
-                                    </li>
-                                    {Array.from({ length: totalPages }, (_, index) => (
-                                        <li key={index}
-                                            className='{`page-item ${currentPage === index + 1 ? "active": ""}`}'>
-                                            <button className='page-link'
-                                                onClick={() => setCurrentPage(index + 1)}>
-                                                {index + 1}
-
-                                            </button>
-                                        </li>
-                                    ))}
-                                    <li className='{`page-item $(currentPage === totalPages ? "disabled" : "")`}'>
-                                        <button className='page-link' onClick={() => setCurrentPage(currentPage + 1)}>
-                                            Next
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-
-                        </div>
                     </div>
-
                 ))}
             </div>
-        </div >
+
+            <div className='d-flex justify-content-center mt-4'>
+                <nav>
+                    <ul className='pagination'>
+                        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                            <button
+                                className='page-link'
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                            >
+                                Previous
+                            </button>
+                        </li>
+
+                        {Array.from(
+                            { length: endPage - startPage + 1 },
+                            (_, index) => (
+                                <li
+                                    key={startPage + index}
+                                    className={`page-item ${currentPage === startPage + index ? "active" : ""}`}
+                                >
+                                    <button
+                                        className='page-link'
+                                        onClick={() => setCurrentPage(startPage + index)}
+                                    >
+                                        {startPage + index}
+                                    </button>
+                                </li>
+                            )
+                        )}
+
+                        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                            <button
+                                className='page-link'
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     );
 }
 
