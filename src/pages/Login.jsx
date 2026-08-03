@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  const navigate = useNavigate("/");
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -24,7 +26,10 @@ const Login = () => {
       loginData.password === user.password
     ) {
       console.log("login successful");
-      localStorage.setItem("isLoggedIN", true);
+      // localStorage.setItem("isLoggedIN", "true");
+      login();
+
+      // navigate("/");
     } else {
       alert("Invalid Credentials");
     }

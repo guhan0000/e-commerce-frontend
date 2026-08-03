@@ -61,14 +61,15 @@ const Register = () => {
                   </div>
                   {/* <input type="submit" value="Register" /> */}
                   <button className="btn btn-primary">Register</button>
-                  <button
+                  {/* <button
                     onClick={() => {
                       setUser({ userName: "", email: "", password: "" });
                     }}
                     className="btn btn-secondary ms-2"
+                    type="reset"
                   >
                     Reset
-                  </button>
+                  </button> */}
                 </form>
               </div>
             </div>
