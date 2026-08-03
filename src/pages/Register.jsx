@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {
+  const savedUser = useContext(AuthContext);
   const [user, setUser] = useState({ userName: "", email: "", password: "" });
   const navigate = useNavigate();
   const handleChange = (e) => {
