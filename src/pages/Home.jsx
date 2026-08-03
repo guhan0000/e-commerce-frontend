@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
     const [products, setproducts] = useState([]);
@@ -14,6 +15,7 @@ function Home() {
 
     const lastProductIndex = currentPage * productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage;
+<<<<<<< HEAD
     const currentProducts = products.slice(firstProductIndex, lastProductIndex);
     const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -25,6 +27,28 @@ function Home() {
     return (
         <div className='container mt-5'>
             <h2 className='mb-4 text-center'>Featured Products</h2>
+=======
+    const currentProducts = products.slice(
+        firstProductIndex,
+        lastProductIndex
+    );
+
+    const totalPages = Math.ceil(products.length / productsPerPage);
+
+    const pagesPerGroup = 5;
+
+    const startPage =
+        Math.floor((currentPage - 1) / pagesPerGroup) * pagesPerGroup + 1;
+
+    const endPage = Math.min(
+        startPage + pagesPerGroup - 1,
+        totalPages
+    );
+
+    return (
+        <div className="container mt-5">
+            <h2 className="mb-4 text-center">Featured Products</h2>
+>>>>>>> feature/home
 
             <div className="row">
                 {currentProducts.map((item) => (
@@ -32,6 +56,7 @@ function Home() {
                         className="col-lg-3 col-md-4 col-sm-6 mb-4"
                         key={item.id}
                     >
+<<<<<<< HEAD
                         <div className="card h-100 shadow border-0">
                             <img
                                 src={item.thumbnail}
@@ -39,31 +64,54 @@ function Home() {
                                 alt={item.title}
                                 style={{ height: "220px", objectFit: "contain" }}
                             />
+=======
+                        <Link
+                            to={`/product/${item.id}`}
+                            className="text-decoration-none text-dark"
+                        >
+                            <div className="card h-100 shadow border-0">
+                                <img
+                                    src={item.thumbnail}
+                                    className="card-img-top p-3"
+                                    alt={item.title}
+                                    style={{ height: "220px", objectFit: "contain" }}
+                                />
 
-                            <div className="card-body d-flex flex-column">
-                                <h6 className="fw-bold">{item.title}</h6>
+                                <div className="card-body d-flex flex-column">
+                                    <h6 className="fw-bold">{item.title}</h6>
+>>>>>>> feature/home
 
-                                <p className="text-muted text-capitalize mb-1">
-                                    {item.category}
-                                </p>
+                                    <p className="text-muted text-capitalize mb-1">
+                                        {item.category}
+                                    </p>
 
-                                <p className="mb-1">
-                                    ⭐ {item.rating}
-                                </p>
+                                    <p className="mb-1">⭐ {item.rating}</p>
 
-                                <h5 className="text-success fw-bold">
-                                    ${item.price}
-                                </h5>
+                                    <h5 className="text-success fw-bold">
+                                        ${item.price}
+                                    </h5>
 
-                                <button className="btn btn-outline-success w-100 mt-auto">
-                                    ❤️ Add to Wishlist
-                                </button>
+                                    <div className="d-grid gap-2 mt-auto">
+                                        <button className="btn btn-outline-danger">
+                                            ❤️ Add to Wishlist
+                                        </button>
+
+                                        <button className="btn btn-success">
+                                            🛒 Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+<<<<<<< HEAD
                         </div>
+=======
+                        </Link>
+>>>>>>> feature/home
                     </div>
                 ))}
             </div>
 
+<<<<<<< HEAD
             <div className='d-flex justify-content-center mt-4'>
                 <nav>
                     <ul className='pagination'>
@@ -71,6 +119,22 @@ function Home() {
                             <button
                                 className='page-link'
                                 onClick={() => setCurrentPage(currentPage - 1)}
+
+            <div className="d-flex justify-content-center mt-4">
+                <nav>
+                    <ul className="pagination">
+                        <li
+                            className={`page-item ${currentPage === 1 ? "disabled" : ""
+                                }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => {
+                                    if (currentPage > 1) {
+                                        setCurrentPage(currentPage - 1);
+                                    }
+                                }}
+>>>>>>> feature/home
                             >
                                 Previous
                             </button>
@@ -81,11 +145,24 @@ function Home() {
                             (_, index) => (
                                 <li
                                     key={startPage + index}
+<<<<<<< HEAD
                                     className={`page-item ${currentPage === startPage + index ? "active" : ""}`}
                                 >
                                     <button
                                         className='page-link'
                                         onClick={() => setCurrentPage(startPage + index)}
+=======
+                                    className={`page-item ${currentPage === startPage + index
+                                            ? "active"
+                                            : ""
+                                        }`}
+                                >
+                                    <button
+                                        className="page-link"
+                                        onClick={() =>
+                                            setCurrentPage(startPage + index)
+                                        }
+>>>>>>> feature/home
                                     >
                                         {startPage + index}
                                     </button>
@@ -93,10 +170,24 @@ function Home() {
                             )
                         )}
 
+<<<<<<< HEAD
                         <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
                             <button
                                 className='page-link'
                                 onClick={() => setCurrentPage(currentPage + 1)}
+=======
+                        <li
+                            className={`page-item ${currentPage === totalPages ? "disabled" : ""
+                                }`}
+                        >
+                            <button
+                                className="page-link"
+                                onClick={() => {
+                                    if (currentPage < totalPages) {
+                                        setCurrentPage(currentPage + 1);
+                                    }
+                                }}
+>>>>>>> feature/home
                             >
                                 Next
                             </button>
