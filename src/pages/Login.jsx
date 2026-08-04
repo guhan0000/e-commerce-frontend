@@ -12,20 +12,20 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user);
-    console.log(loginData);
+    // console.log(user);
+    // console.log(loginData);
 
-    console.log(loginData.email);
-    console.log(user.email);
+    // console.log(loginData.email);
+    // console.log(user.email);
 
-    console.log(loginData.email === user.email);
+    // console.log(loginData.email === user.email);
 
     if (
       loginData &&
       loginData.email === user.email &&
       loginData.password === user.password
     ) {
-      console.log("login successful");
+      // console.log("login successful");
       // localStorage.setItem("isLoggedIN", "true");
       login();
 
