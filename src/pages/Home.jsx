@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FavContext } from "../context/FavContext";
 
 function Home() {
   const [products, setproducts] = useState([]);
@@ -27,10 +28,13 @@ function Home() {
 
   const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
   const { loggedIn, savedUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const handleWishlist = () => {
-    navigate("/favourites");
+  const { favourites, addFavourites, isFavourite, toggleFavourites } =
+    useContext(FavContext);
+
+  const handleWishlist = (item) => {
+    addFavourites(item);
   };
+
   const handleCart = () => {
     navigate("/cart");
   };
@@ -67,9 +71,11 @@ function Home() {
                   <div className="d-grid gap-2 mt-auto">
                     <button
                       className="btn btn-outline-danger"
-                      onClick={handleWishlist}
+                      onClick={() => {
+                        toggleFavourites(item);
+                      }}
                     >
-                      ❤️ Add to Wishlist
+                      {isFavourite(item.id) ? "❤️" : "🤍"}
                     </button>
                   </div>
                 )}
