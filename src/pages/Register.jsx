@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FavContext } from "../context/FavContext";
 
 const Register = () => {
   const savedUser = useContext(AuthContext);
+  const { clearFavourites } = useContext(FavContext);
   const [user, setUser] = useState({ userName: "", email: "", password: "" });
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -12,7 +14,8 @@ const Register = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
+    clearFavourites();
     localStorage.setItem("user", JSON.stringify(user));
     navigate("/login");
   };
