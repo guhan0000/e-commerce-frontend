@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
-  console.log(localStorage.getItem("user"));
-  console.log(JSON.parse(localStorage.getItem("user")));
+  // console.log(localStorage.getItem("user"));
+  // console.log(JSON.parse(localStorage.getItem("user")));
 
   // const savedUser = JSON.parse(localStorage.getItem("user"));
   // console.log(savedUser);

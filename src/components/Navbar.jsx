@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { FavContext } from "../context/FavContext";
 
 const Navbar = () => {
   const { loggedIn, savedUser, login, logout, register } =
     useContext(AuthContext);
-
+  const { favourites } = useContext(FavContext);
   const navigate = useNavigate();
   function handleLogout() {
     console.log("Logout clicked");
@@ -47,8 +48,17 @@ const Navbar = () => {
               {loggedIn && (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/favourites">
+                    <Link
+                      className="nav-link position-relative"
+                      to="/favourites"
+                    >
                       Favourites
+                      <i className="bi bi-heart-fill"></i>
+                      {favourites.length > 0 && (
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          {favourites.length}
+                        </span>
+                      )}
                     </Link>
                   </li>
                   <li className="nav-item">
