@@ -125,9 +125,8 @@ function Home() {
             {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
               <li
                 key={startPage + index}
-                className={`page-item ${
-                  currentPage === startPage + index ? "active" : ""
-                }`}
+                className={`page-item ${currentPage === startPage + index ? "active" : ""
+                  }`}
               >
                 <button
                   className="page-link"
@@ -139,9 +138,8 @@ function Home() {
             ))}
 
             <li
-              className={`page-item ${
-                currentPage === totalPages ? "disabled" : ""
-              }`}
+              className={`page-item ${currentPage === totalPages ? "disabled" : ""
+                }`}
             >
               <button
                 className="page-link"
