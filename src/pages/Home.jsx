@@ -67,26 +67,46 @@ function Home() {
             <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={item.id}>
               <div className="card h-100 shadow border-0">
                 <div className="card-body d-flex flex-column">
-                  <Link
-                    to={`/product/${item.id}`}
-                    className="text-decoration-none text-dark"
-                  >
-                    <img
-                      src={item.thumbnail}
-                      className="card-img-top p-3"
-                      alt={item.title}
-                      style={{ height: "220px", objectFit: "contain" }}
-                    />
-                    <h6 className="fw-bold">{item.title}</h6>
+                  {savedUser && loggedIn ? (
+                    <Link
+                      to={`/product/${item.id}`}
+                      className="text-decoration-none text-dark"
+                    >
+                      <img
+                        src={item.thumbnail}
+                        className="card-img-top p-3"
+                        alt={item.title}
+                        style={{ height: "220px", objectFit: "contain" }}
+                      />
+                      <h6 className="fw-bold">{item.title}</h6>
 
-                    <p className="text-muted text-capitalize mb-1">
-                      {item.category}
-                    </p>
+                      <p className="text-muted text-capitalize mb-1">
+                        {item.category}
+                      </p>
 
-                    <p className="mb-1">⭐ {item.rating}</p>
+                      <p className="mb-1">⭐ {item.rating}</p>
 
-                    <h5 className="text-success fw-bold">${item.price}</h5>
-                  </Link>
+                      <h5 className="text-success fw-bold">${item.price}</h5>
+                    </Link>
+                  ) : (
+                    <>
+                      <img
+                        src={item.thumbnail}
+                        className="card-img-top p-3"
+                        alt={item.title}
+                        style={{ height: "220px", objectFit: "contain" }}
+                      />
+                      <h6 className="fw-bold">{item.title}</h6>
+
+                      <p className="text-muted text-capitalize mb-1">
+                        {item.category}
+                      </p>
+
+                      <p className="mb-1">⭐ {item.rating}</p>
+
+                      <h5 className="text-success fw-bold">${item.price}</h5>
+                    </>
+                  )}
                   {savedUser && loggedIn && (
                     <div className="d-grid gap-2 mt-auto">
                       <button
