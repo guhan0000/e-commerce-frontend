@@ -4,8 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { FavContext } from "../context/FavContext";
 
 const Navbar = () => {
-  const { loggedIn, savedUser, login, logout, register } =
-    useContext(AuthContext);
+  const { loggedIn, savedUser, login, logout } = useContext(AuthContext);
   const { favourites } = useContext(FavContext);
   const navigate = useNavigate();
   function handleLogout() {

@@ -14,7 +14,9 @@ export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("isLoggedIN") === "true",
   );
-  const [savedUser, setSavedUser] = useState({});
+  const [savedUser, setSavedUser] = useState(() => {
+    return JSON.parse(localStorage.getItem("user") || null);
+  });
 
   const login = () => {
     localStorage.setItem("isLoggedIN", "true");
