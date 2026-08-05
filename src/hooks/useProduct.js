@@ -21,12 +21,21 @@ const useProduct = (search, sortOrder) => {
           url = `${BASE_URL}?limit=194`;
         }
 
-        if (sortOrder === "low-high") {
-          url += "&sortBy=price&order=asc";
-        } else if (sortOrder === "high-low") {
-          url += "&sortBy=price&order=desc";
-        }
+        // if (sortOrder === "price-low-high") {
+        //   url += "&sortBy=price&order=asc";
+        // } else if (sortOrder === "price-high-low") {
+        //   url += "&sortBy=price&order=desc";
+        // }
 
+        // if (sortOrder === "rating-low-high") {
+        //   url += "&sortBy=rating&order=asc";
+        // } else if (sortOrder === "rating-high-low") {
+        //   url += "&sortBy=rating&order=desc";
+        // }
+        if (sortOrder) {
+          const [sortBy, orderBy] = sortOrder.split("-");
+          url += `&sortBy=${sortBy}&order=${orderBy}`;
+        }
         const response = await fetch(url);
 
         if (!response.ok) {

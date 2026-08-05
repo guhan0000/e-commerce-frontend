@@ -5,25 +5,25 @@ import { FavContext } from "../context/FavContext";
 import SearchBar from "../components/SearchBar";
 import SortDropdown from "../components/SortDropdown";
 import useProduct from "../hooks/useProduct";
+import Pagination from "../components/Pagination";
 function Home() {
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const { products, loading, error } = useProduct(search, sortOrder);
-  const productsPerPage = 8;
 
+  const productsPerPage = 8;
   const lastProductIndex = currentPage * productsPerPage;
   const firstProductIndex = lastProductIndex - productsPerPage;
   const currentProducts = products.slice(firstProductIndex, lastProductIndex);
-
   const totalPages = Math.ceil(products.length / productsPerPage);
-
   const pagesPerGroup = 5;
-
   const startPage =
     Math.floor((currentPage - 1) / pagesPerGroup) * pagesPerGroup + 1;
-
   const endPage = Math.min(startPage + pagesPerGroup - 1, totalPages);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [products]);
   const { loggedIn, savedUser } = useContext(AuthContext);
   const { favourites, addFavourites, isFavourite, toggleFavourites } =
     useContext(FavContext);
@@ -108,58 +108,13 @@ function Home() {
           ))}
         </div>
       )}
-
-      <div className="d-flex justify-content-center mt-4">
-        <nav>
-          <ul className="pagination">
-            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-              <button
-                className="page-link"
-                onClick={() => {
-                  if (currentPage > 1) {
-                    setCurrentPage(currentPage - 1);
-                  }
-                }}
-              >
-                Previous
-              </button>
-            </li>
-
-            {Array.from({ length: endPage - startPage + 1 }, (_, index) => (
-              <li
-                key={startPage + index}
-                className={`page-item ${
-                  currentPage === startPage + index ? "active" : ""
-                }`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => setCurrentPage(startPage + index)}
-                >
-                  {startPage + index}
-                </button>
-              </li>
-            ))}
-
-            <li
-              className={`page-item ${
-                currentPage === totalPages ? "disabled" : ""
-              }`}
-            >
-              <button
-                className="page-link"
-                onClick={() => {
-                  if (currentPage < totalPages) {
-                    setCurrentPage(currentPage + 1);
-                  }
-                }}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        startPage={startPage}
+        endPage={endPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

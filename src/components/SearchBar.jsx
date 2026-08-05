@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 function SearchBar({ search, setSearch }) {
   return (
     <div className="row justify-content-center mb-4">
@@ -6,7 +6,7 @@ function SearchBar({ search, setSearch }) {
         <input
           type="text"
           className="form-control"
-          placeholder="🔎 Search For Products, Brands and More 🔍"
+          placeholder="🔎 Search For Products, Brands and More"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
