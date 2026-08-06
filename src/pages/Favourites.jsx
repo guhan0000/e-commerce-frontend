@@ -4,7 +4,7 @@ import { FavContext } from "../context/FavContext";
 import { Link } from "react-router-dom";
 
 const Favourites = () => {
-  const { favourites } = useContext(FavContext);
+  const { favourites, removeFavourites } = useContext(FavContext);
   return (
     <div>
       <div className="container mt-4">
@@ -39,6 +39,14 @@ const Favourites = () => {
 
                     <h5 className="text-success fw-bold">${product.price}</h5>
                   </Link>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => {
+                      removeFavourites(product.id);
+                    }}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </div>
