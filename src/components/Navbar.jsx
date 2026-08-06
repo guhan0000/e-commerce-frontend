@@ -2,11 +2,17 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FavContext } from "../context/FavContext";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
   const { loggedIn, savedUser, login, logout } = useContext(AuthContext);
   const { favourites } = useContext(FavContext);
+  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
+  const cartCount = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
   function handleLogout() {
     console.log("Logout clicked");
     logout();
@@ -61,8 +67,14 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/cart">
-                      Cart
+                    <Link className="nav-link position-relative" to="/cart">
+                       Cart
+
+                      {cartCount > 0 && (
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          {cartCount}
+                        </span>
+                      )}
                     </Link>
                   </li>
                   <li className="nav-item dropdown">

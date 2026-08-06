@@ -1,18 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FavContext } from "../context/FavContext";
 import SearchBar from "../components/SearchBar";
+import { CartContext } from "../context/CartContext";
+
 import SortDropdown from "../components/SortDropdown";
 import useProduct from "../hooks/useProduct";
 import Pagination from "../components/Pagination";
 function Home() {
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const { addToCart } = useContext(CartContext);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { products, loading, error } = useProduct(search, sortOrder);
 
   const productsPerPage = 8;
+
+
   const lastProductIndex = currentPage * productsPerPage;
   const firstProductIndex = lastProductIndex - productsPerPage;
   const currentProducts = products.slice(firstProductIndex, lastProductIndex);
@@ -27,17 +33,14 @@ function Home() {
   const { loggedIn, savedUser } = useContext(AuthContext);
   const { favourites, addFavourites, isFavourite, toggleFavourites } =
     useContext(FavContext);
-
   const handleWishlist = (item) => {
     addFavourites(item);
   };
-
-  const handleCart = () => {
-    navigate("/cart");
-  };
-
+  // const handleCart = () => {
+  //   navigate("/cart");
+  // };
   return (
-    <div className="container mt-5">
+   <div className="container mt-5">
       <SearchBar search={search} setSearch={setSearch} />
       <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
 
