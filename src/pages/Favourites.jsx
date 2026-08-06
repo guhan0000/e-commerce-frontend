@@ -39,7 +39,7 @@ const Favourites = () => {
                     <h5 className="text-success fw-bold">${product.price}</h5>
                   </Link>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger mt-auto"
                     onClick={() => {
                       removeFavourites(product.id);
                     }}
