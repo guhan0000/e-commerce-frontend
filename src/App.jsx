@@ -40,7 +40,11 @@ function App() {
             />
             <Route
               path="/product/:id"
-              element={<ProductDetails />}
+              element={
+              <ProtectedRoute>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
             />
           </Routes>
         </AuthProvider>
