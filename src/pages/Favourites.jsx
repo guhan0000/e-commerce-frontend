@@ -2,7 +2,6 @@ import React from "react";
 import { useContext } from "react";
 import { FavContext } from "../context/FavContext";
 import { Link } from "react-router-dom";
-
 const Favourites = () => {
   const { favourites } = useContext(FavContext);
   return (

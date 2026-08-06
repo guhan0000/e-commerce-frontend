@@ -5,7 +5,7 @@ import { CartContext } from "../context/CartContext";
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState({});
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, cartItems } = useContext(CartContext);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -13,6 +13,9 @@ function ProductDetails() {
       .then((data) => setProduct(data))
       .catch((error) => console.log(error));
   }, [id]);
+  const isInCart = cartItems.some(
+    (item) => item.id === product.id
+  );
 
   return (
     <div className="container mt-5">
@@ -48,10 +51,12 @@ function ProductDetails() {
           <p>{product.description}</p>
 
           <button
-            className="btn btn-success"
+            className={`btn ${isInCart ? "btn-secondary" : "btn-success"
+              }`}
             onClick={() => addToCart(product)}
+            disabled={isInCart}
           >
-            🛒 Add to Cart
+            {isInCart ? "✅ Added to Cart" : "🛒 Add to Cart"}
           </button>
         </div>
       </div>

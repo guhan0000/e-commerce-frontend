@@ -18,10 +18,24 @@ function Cart() {
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center mb-4">🛒 My Cart</h2>
+     <div className="d-flex justify-content-between align-items-center mb-4">
+  <h2> My Cart</h2>
+
+  {cartItems.length > 0 && (
+    <div className="card p-3 shadow" style={{ width: "260px" }}>
+      <h5 className="mb-2">
+        Total Items: {cartItems.length}
+      </h5>
+
+      <h4 className="text-success mb-0">
+        Total: ${totalPrice.toFixed(2)}
+      </h4>
+    </div>
+  )}
+</div>
 
       {cartItems.length === 0 ? (
-        <h4 className="text-center">Your cart is empty.</h4>
+        <h4 className="text-center text-danger">Your cart is empty.</h4>
       ) : (
         <>
           <div className="row">
@@ -42,16 +56,27 @@ function Cart() {
                     }}
                   />
 
-                  <div className="card-body">
-                    <h5>{item.title}</h5>
+                  <div className="card-body d-flex flex-column">
+                    <h5
+                      className="mb-2"
+                      style={{ minHeight: "60px" }}
+                    >
+                      {item.title}
+                    </h5>
 
-                    <p>{item.category}</p>
+                    <p className="text-muted mb-1">
+                      {item.category}
+                    </p>
 
-                    <p>⭐ {item.rating}</p>
+                    <p className="mb-1">
+                      ⭐ {item.rating}
+                    </p>
 
-                    <h4 className="text-success">${item.price}</h4>
+                    <h4 className="text-success mb-3">
+                      ${item.price}
+                    </h4>
 
-                    <div className="d-flex justify-content-center align-items-center gap-2 my-3">
+                    <div className="d-flex justify-content-center align-items-center gap-2 mt-auto mb-3">
                       <button
                         className="btn btn-outline-danger"
                         onClick={() => decreaseQuantity(item.id)}
@@ -75,7 +100,7 @@ function Cart() {
                       className="btn btn-danger w-100"
                       onClick={() => removeFromCart(item.id)}
                     >
-                      🗑️ Remove
+                      Remove
                     </button>
                   </div>
                 </div>
@@ -83,15 +108,7 @@ function Cart() {
             ))}
           </div>
 
-          <div className="d-flex justify-content-end mt-4">
-            <div className="card p-3 shadow" style={{ width: "300px" }}>
-              <h4>Total Items: {cartItems.length}</h4>
-
-              <h3 className="text-success">
-                Total: ${totalPrice.toFixed(2)}
-              </h3>
-            </div>
-          </div>
+         
         </>
       )}
     </div>
