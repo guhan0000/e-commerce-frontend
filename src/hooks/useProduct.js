@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const BASE_URL = "https://dummyjson.com/products";
 
-const useProduct = (search, sortOrder) => {
+const useProduct = (search, sortOrder, selectedCategories) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -24,6 +24,7 @@ const useProduct = (search, sortOrder) => {
           const [sortBy, orderBy] = sortOrder.split("-");
           url += `&sortBy=${sortBy}&order=${orderBy}`;
         }
+
         const response = await fetch(url);
 
         if (!response.ok) {
@@ -33,6 +34,15 @@ const useProduct = (search, sortOrder) => {
         const data = await response.json();
 
         setProducts(data.products);
+        let filteredProducts;
+
+        if (selectedCategories.length > 0) {
+          filteredProducts = data.products.filter((product) =>
+            selectedCategories.includes(product.category),
+          );
+          setProducts(filteredProducts);
+          // console.log(filteredProducts);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -41,7 +51,7 @@ const useProduct = (search, sortOrder) => {
     };
 
     fetchProducts();
-  }, [search, sortOrder]);
+  }, [search, sortOrder, selectedCategories]);
 
   return {
     products,

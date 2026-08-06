@@ -8,16 +8,21 @@ import { CartContext } from "../context/CartContext";
 import SortDropdown from "../components/SortDropdown";
 import useProduct from "../hooks/useProduct";
 import Pagination from "../components/Pagination";
+import CategoryFilter from "../components/CategoryFilter";
 function Home() {
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const { addToCart } = useContext(CartContext);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, loading, error } = useProduct(search, sortOrder);
+  const { products, loading, error } = useProduct(
+    search,
+    sortOrder,
+    selectedCategories,
+  );
 
   const productsPerPage = 8;
-
 
   const lastProductIndex = currentPage * productsPerPage;
   const firstProductIndex = lastProductIndex - productsPerPage;
@@ -40,8 +45,13 @@ function Home() {
   //   navigate("/cart");
   // };
   return (
-   <div className="container mt-5">
+    <div className="container mt-5">
       <SearchBar search={search} setSearch={setSearch} />
+
+      <CategoryFilter
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+      />
       <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
 
       <h2 className="mb-4 text-center">Featured Products</h2>
