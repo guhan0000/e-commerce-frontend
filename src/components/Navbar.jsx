@@ -5,8 +5,7 @@ import { FavContext } from "../context/FavContext";
 import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
-  const { loggedIn, savedUser, login, logout, register } =
-    useContext(AuthContext);
+  const { loggedIn, savedUser, login, logout } = useContext(AuthContext);
   const { favourites } = useContext(FavContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();

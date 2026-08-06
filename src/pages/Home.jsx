@@ -43,82 +43,96 @@ function Home() {
    <div className="container mt-5">
       <SearchBar search={search} setSearch={setSearch} />
       <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
+
       <h2 className="mb-4 text-center">Featured Products</h2>
-      {currentProducts.length === 0 ? (
+
+      {error ? (
         <div className="text-center mt-5">
-          <h4>No products found </h4>
+          <h5>{error}</h5>
+        </div>
+      ) : loading ? (
+        <div className="text-center mt-5">
+          <h5>Loading...</h5>
+        </div>
+      ) : currentProducts.length === 0 ? (
+        <div className="text-center mt-5">
+          <h4>No products found</h4>
         </div>
       ) : (
-        <div className="row">
-          {currentProducts.map((item) => (
-            <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={item.id}>
-              <div className="card h-100 shadow border-0">
-                <div className="card-body d-flex flex-column">
-                  {savedUser && loggedIn ? (
-                    <Link
-                      to={`/product/${item.id}`}
-                      className="text-decoration-none text-dark"
-                    >
-                      <img
-                        src={item.thumbnail}
-                        className="card-img-top p-3"
-                        alt={item.title}
-                        style={{ height: "220px", objectFit: "contain" }}
-                      />
-                      <h6 className="fw-bold">{item.title}</h6>
-
-                      <p className="text-muted text-capitalize mb-1">
-                        {item.category}
-                      </p>
-
-                      <p className="mb-1">⭐ {item.rating}</p>
-
-                      <h5 className="text-success fw-bold">${item.price}</h5>
-                    </Link>
-                  ) : (
-                    <>
-                      <img
-                        src={item.thumbnail}
-                        className="card-img-top p-3"
-                        alt={item.title}
-                        style={{ height: "220px", objectFit: "contain" }}
-                      />
-                      <h6 className="fw-bold">{item.title}</h6>
-
-                      <p className="text-muted text-capitalize mb-1">
-                        {item.category}
-                      </p>
-
-                      <p className="mb-1">⭐ {item.rating}</p>
-
-                      <h5 className="text-success fw-bold">${item.price}</h5>
-                    </>
-                  )}
-                  {savedUser && loggedIn && (
-                    <div className="d-grid gap-2 mt-auto">
-                      <button
-                        className="btn btn-outline-danger"
-                        onClick={() => {
-                          toggleFavourites(item);
-                        }}
+        <>
+          <div className="row">
+            {currentProducts.map((item) => (
+              <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={item.id}>
+                <div className="card h-100 shadow border-0">
+                  <div className="card-body d-flex flex-column">
+                    {savedUser && loggedIn ? (
+                      <Link
+                        to={`/product/${item.id}`}
+                        className="text-decoration-none text-dark"
                       >
-                        {isFavourite(item.id) ? "❤️" : "🤍"}
-                      </button>
-                    </div>
-                  )}
+                        <img
+                          src={item.thumbnail}
+                          className="card-img-top p-3"
+                          alt={item.title}
+                          style={{ height: "220px", objectFit: "contain" }}
+                        />
+
+                        <h6 className="fw-bold">{item.title}</h6>
+
+                        <p className="text-muted text-capitalize mb-1">
+                          {item.category}
+                        </p>
+
+                        <p className="mb-1">⭐ {item.rating}</p>
+
+                        <h5 className="text-success fw-bold">${item.price}</h5>
+                      </Link>
+                    ) : (
+                      <>
+                        <img
+                          src={item.thumbnail}
+                          className="card-img-top p-3"
+                          alt={item.title}
+                          style={{ height: "220px", objectFit: "contain" }}
+                        />
+
+                        <h6 className="fw-bold">{item.title}</h6>
+
+                        <p className="text-muted text-capitalize mb-1">
+                          {item.category}
+                        </p>
+
+                        <p className="mb-1">⭐ {item.rating}</p>
+
+                        <h5 className="text-success fw-bold">${item.price}</h5>
+                      </>
+                    )}
+
+                    {savedUser && loggedIn && (
+                      <div className="d-grid gap-2 mt-auto">
+                        <button
+                          className="btn btn-outline-danger"
+                          onClick={() => toggleFavourites(item)}
+                        >
+                          {isFavourite(item.id) ? "❤️" : "🤍"}
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            startPage={startPage}
+            endPage={endPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
       )}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        startPage={startPage}
-        endPage={endPage}
-        setCurrentPage={setCurrentPage}
-      />
     </div>
   );
 }
