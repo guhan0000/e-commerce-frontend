@@ -10,9 +10,17 @@ import useProduct from "../hooks/useProduct";
 import Pagination from "../components/Pagination";
 import CategoryFilter from "../components/CategoryFilter";
 function Home() {
-  const [search, setSearch] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  // const [search, setSearch] = useState("");
+  // const [sortOrder, setSortOrder] = useState("");
+  // const [selectedCategories, setSelectedCategories] = useState([]);
+  const {
+    search,
+    setSearch,
+    sortOrder,
+    setSortOrder,
+    selectedCategories,
+    setSelectedCategories,
+  } = useContext(AuthContext);
   const { addToCart } = useContext(CartContext);
 
   const [currentPage, setCurrentPage] = useState(1);

@@ -9,6 +9,9 @@ export const AuthProvider = ({ children }) => {
 
   // const savedUser = JSON.parse(localStorage.getItem("user"));
   // console.log(savedUser);
+  const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(
@@ -20,18 +23,37 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     localStorage.setItem("isLoggedIN", "true");
+    setSearch("");
+    setSortOrder("");
+    setSelectedCategories([]);
     setLoggedIn(true);
     setSavedUser(JSON.parse(localStorage.getItem("user")));
     navigate("/");
   };
   const logout = () => {
     localStorage.removeItem("isLoggedIN");
+    setSearch("");
+    setSortOrder("");
+    setSelectedCategories([]);
     setLoggedIn(false);
     navigate("/login");
     setSavedUser({});
   };
   return (
-    <AuthContext.Provider value={{ loggedIn, savedUser, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        loggedIn,
+        savedUser,
+        login,
+        logout,
+        search,
+        setSearch,
+        sortOrder,
+        setSortOrder,
+        selectedCategories,
+        setSelectedCategories,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
