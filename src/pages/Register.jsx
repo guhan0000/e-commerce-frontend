@@ -6,7 +6,7 @@ import { FavContext } from "../context/FavContext";
 import { CartContext } from "../context/CartContext";
 
 const Register = () => {
-  const savedUser = useContext(AuthContext);
+  const { savedUser } = useContext(AuthContext);
   const { clearFavourites } = useContext(FavContext);
   const { clearCart } = useContext(CartContext);
   const [user, setUser] = useState({ userName: "", email: "", password: "" });
@@ -16,11 +16,17 @@ const Register = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(user);
+    console.log(user);
     clearFavourites();
     clearCart();
-    localStorage.setItem("user", JSON.stringify(user));
-    navigate("/login");
+
+    if (savedUser && savedUser.email === user.email) {
+      alert("User already exists");
+      console.log("user already exists");
+    } else {
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/login");
+    }
   };
   return (
     <>
