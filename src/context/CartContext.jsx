@@ -7,15 +7,13 @@ function CartProvider({ children }) {
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      const existingProduct = prevItems.find(
-        (item) => item.id === product.id
-      );
+      const existingProduct = prevItems.find((item) => item.id === product.id);
 
       if (existingProduct) {
         return prevItems.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
-            : item
+            : item,
         );
       }
 
@@ -26,10 +24,8 @@ function CartProvider({ children }) {
   const increaseQuantity = (id) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
     );
   };
 
@@ -37,18 +33,14 @@ function CartProvider({ children }) {
     setCartItems((prevItems) =>
       prevItems
         .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
+          item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
         )
-        .filter((item) => item.quantity > 0)
+        .filter((item) => item.quantity > 0),
     );
   };
 
   const removeFromCart = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== id)
-    );
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   useEffect(() => {

@@ -9,32 +9,18 @@ const Navbar = () => {
   const { favourites } = useContext(FavContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
-  const cartCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  console.log("cart items", cartItems);
+
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   function handleLogout() {
     console.log("Logout clicked");
     logout();
   }
-  // function handleLogout() {
-  //   console.log("logout clicked");
-
-  //   localStorage.removeItem("loggedIn");
-  //   navigate("/login");
-  // }
-  // localStorage.getItem("isLoggedIN") &&
-  //   localStorage.getItem("isLoggedIN") === true &&
-  //   console.log("user logged in");
-  // console.log(Boolean(localStorage.getItem("isLoggedIN")) === "true");
 
   return (
     <>
       <nav className="navbar navbar-expand-md bg-primary">
         <div className="container">
-          {/* <a className="navbar-brand" href="#">
-            E-Shop
-          </a> */}
           <Link className="navbar-brand" to="/">
             E-Shop
           </Link>
@@ -68,8 +54,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link position-relative" to="/cart">
-                       Cart
-
+                      Cart
                       {cartCount > 0 && (
                         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                           {cartCount}
@@ -78,9 +63,6 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li className="nav-item dropdown">
-                    {/* <Link className="btn nav-link" onClick={handleLogout}>
-                      Logout
-                    </Link> */}
                     <Link
                       to="#"
                       className="nav-link dropdown-toggle"

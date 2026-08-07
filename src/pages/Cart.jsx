@@ -2,37 +2,32 @@ import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 function Cart() {
-  const {
-    cartItems,
-    increaseQuantity,
-    decreaseQuantity,
-    removeFromCart,
-  } = useContext(CartContext);
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } =
+    useContext(CartContext);
 
-  console.log("Cart Page:", cartItems);
+  // console.log("Cart Page:", cartItems);
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
+    0,
   );
 
   return (
     <div className="container mt-5">
-     <div className="d-flex justify-content-between align-items-center mb-4">
-  <h2> My Cart</h2>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2> My Cart</h2>
 
-  {cartItems.length > 0 && (
-    <div className="card p-3 shadow" style={{ width: "260px" }}>
-      <h5 className="mb-2">
-        Total Items: {cartItems.length}
-      </h5>
+        {cartItems.length > 0 && (
+          <div className="card p-3 shadow" style={{ width: "260px" }}>
+            <h5 className="mb-2">Total Items: {cartCount}</h5>
 
-      <h4 className="text-success mb-0">
-        Total: ${totalPrice.toFixed(2)}
-      </h4>
-    </div>
-  )}
-</div>
+            <h4 className="text-success mb-0">
+              Total: ${totalPrice.toFixed(2)}
+            </h4>
+          </div>
+        )}
+      </div>
 
       {cartItems.length === 0 ? (
         <h4 className="text-center text-danger">Your cart is empty.</h4>
@@ -40,10 +35,7 @@ function Cart() {
         <>
           <div className="row">
             {cartItems.map((item) => (
-              <div
-                className="col-lg-3 col-md-4 col-sm-6 mb-4"
-                key={item.id}
-              >
+              <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={item.id}>
                 <div className="card h-100 shadow border-0">
                   <img
                     src={item.thumbnail}
@@ -57,24 +49,15 @@ function Cart() {
                   />
 
                   <div className="card-body d-flex flex-column">
-                    <h5
-                      className="mb-2"
-                      style={{ minHeight: "60px" }}
-                    >
+                    <h5 className="mb-2" style={{ minHeight: "60px" }}>
                       {item.title}
                     </h5>
 
-                    <p className="text-muted mb-1">
-                      {item.category}
-                    </p>
+                    <p className="text-muted mb-1">{item.category}</p>
 
-                    <p className="mb-1">
-                      ⭐ {item.rating}
-                    </p>
+                    <p className="mb-1">⭐ {item.rating}</p>
 
-                    <h4 className="text-success mb-3">
-                      ${item.price}
-                    </h4>
+                    <h4 className="text-success mb-3">${item.price}</h4>
 
                     <div className="d-flex justify-content-center align-items-center gap-2 mt-auto mb-3">
                       <button
@@ -84,9 +67,7 @@ function Cart() {
                         -
                       </button>
 
-                      <span className="fw-bold fs-5">
-                        {item.quantity}
-                      </span>
+                      <span className="fw-bold fs-5">{item.quantity}</span>
 
                       <button
                         className="btn btn-outline-success"
@@ -107,8 +88,6 @@ function Cart() {
               </div>
             ))}
           </div>
-
-         
         </>
       )}
     </div>
