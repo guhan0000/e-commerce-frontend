@@ -9,11 +9,11 @@ const Navbar = () => {
   const { favourites } = useContext(FavContext);
   const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
-  console.log("cart items", cartItems);
+  // console.log("cart items", cartItems);
 
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   function handleLogout() {
-    console.log("Logout clicked");
+    // console.log("Logout clicked");
     logout();
   }
 
