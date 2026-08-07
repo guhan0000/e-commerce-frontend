@@ -52,6 +52,7 @@ const Login = () => {
                       placeholder="Enter Email"
                       required
                       onChange={handleChange}
+                      value={loginData.email}
                     />
                   </div>
                   <div className="mb-3">
@@ -63,6 +64,7 @@ const Login = () => {
                       className="form-control"
                       required
                       onChange={handleChange}
+                      value={loginData.password}
                     />
                   </div>
                   <button className="btn btn-primary">Login</button>
