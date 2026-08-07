@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [savedUser, setSavedUser] = useState(() => {
     return JSON.parse(localStorage.getItem("user") || null);
   });
-// console.log(savedUser);
+  // console.log(savedUser);
 
   const login = () => {
     localStorage.setItem("isLoggedIN", "true");
@@ -38,13 +38,14 @@ export const AuthProvider = ({ children }) => {
     setSelectedCategories([]);
     setLoggedIn(false);
     navigate("/login");
-    setSavedUser({});
+    // setSavedUser({});
   };
   return (
     <AuthContext.Provider
       value={{
         loggedIn,
         savedUser,
+        setSavedUser,
         login,
         logout,
         search,
