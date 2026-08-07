@@ -54,9 +54,17 @@ function Home() {
       />
       <SortDropdown sortOrder={sortOrder} setSortOrder={setSortOrder} />
       <h2 className="mb-4 text-center">Featured Products</h2>
-      {currentProducts.length === 0 ? (
+      {error ? (
         <div className="text-center mt-5">
-          <h4>No products found </h4>
+          <h5>{error}</h5>
+        </div>
+      ) : loading ? (
+        <div className="text-center mt-5">
+          <h5>Loading...</h5>
+        </div>
+      ) : currentProducts.length === 0 ? (
+        <div className="text-center mt-5">
+          <h4>No products found</h4>
         </div>
       ) : (
         <div className="row">
