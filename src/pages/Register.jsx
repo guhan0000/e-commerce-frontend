@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FavContext } from "../context/FavContext";
+import { CartContext } from "../context/CartContext";
 
 const Register = () => {
   const savedUser = useContext(AuthContext);
   const { clearFavourites } = useContext(FavContext);
+  const { clearCart } = useContext(CartContext);
   const [user, setUser] = useState({ userName: "", email: "", password: "" });
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -16,6 +18,7 @@ const Register = () => {
     e.preventDefault();
     // console.log(user);
     clearFavourites();
+    clearCart();
     localStorage.setItem("user", JSON.stringify(user));
     navigate("/login");
   };

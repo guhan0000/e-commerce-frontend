@@ -43,6 +43,10 @@ function CartProvider({ children }) {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
@@ -55,6 +59,7 @@ function CartProvider({ children }) {
         increaseQuantity,
         decreaseQuantity,
         removeFromCart,
+        clearCart,
       }}
     >
       {children}
