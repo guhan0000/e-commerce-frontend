@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [savedUser, setSavedUser] = useState(() => {
     return JSON.parse(localStorage.getItem("user") || null);
   });
+// console.log(savedUser);
 
   const login = () => {
     localStorage.setItem("isLoggedIN", "true");
