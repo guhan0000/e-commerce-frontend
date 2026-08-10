@@ -9,13 +9,13 @@ import { AuthProvider } from "./context/AuthContext";
 import Favourites from "./pages/Favourites";
 import Cart from "./pages/Cart";
 import ProtectedRoute from "./components/ProtectedRoute";
-import  CartProvider  from "./context/CartContext"
+import CartProvider from "./context/CartContext";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <>
       <CartProvider>
-
         <AuthProvider>
           <Navbar />
           <Routes>
@@ -41,11 +41,12 @@ function App() {
             <Route
               path="/product/:id"
               element={
-              <ProtectedRoute>
-                <ProductDetails />
-              </ProtectedRoute>
-            }
+                <ProtectedRoute>
+                  <ProductDetails />
+                </ProtectedRoute>
+              }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AuthProvider>
       </CartProvider>
