@@ -21,9 +21,10 @@ const Login = () => {
     // console.log(loginData.email === user.email);
 
     if (
-      loginData &&
-      loginData.email === user.email &&
-      loginData.password === user.password
+      loginData?.email &&
+      loginData?.password &&
+      loginData?.email === user?.email &&
+      loginData?.password === user?.password
     ) {
       // console.log("login successful");
       // localStorage.setItem("isLoggedIN", "true");
