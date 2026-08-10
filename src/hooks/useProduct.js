@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const BASE_URL = "https://dummyjson.com/products";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const useProduct = (search, sortOrder, selectedCategories) => {
   const [products, setProducts] = useState([]);
